@@ -1,0 +1,26 @@
+name: Report a bug
+description: Describe something that failed or was confusing.
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: "Use fake examples. Never attach journal backups, recordings, credentials or private calendar details."
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: What did you click or enter?
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Expected and actual result
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device, browser and app version
+    validations:
+      required: true

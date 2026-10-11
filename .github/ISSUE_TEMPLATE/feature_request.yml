@@ -1,0 +1,24 @@
+name: Suggest an improvement
+description: Suggest a feature or make a workflow easier.
+title: "[Suggestion] "
+body:
+  - type: markdown
+    attributes:
+      value: "Please use invented examples. Do not include private journal data, recordings or credentials."
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: Tell us which page or workflow could work better.
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: What change would help?
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device and browser (optional)
