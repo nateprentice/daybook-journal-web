@@ -1,0 +1,38 @@
+name: Publish Daybook website
+on:
+  push:
+    branches: [main]
+    paths: [site.zip, .github/workflows/deploy.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: daybook-pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.publish.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract reviewed static website
+        run: |
+          mkdir website
+          unzip -q site.zip -d website
+          test -f website/index.html
+          test -f website/main.dart.js
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: website
+      - name: Publish
+        id: publish
+        uses: actions/deploy-pages@v4
+
