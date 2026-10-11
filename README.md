@@ -2,7 +2,7 @@
 
 A simple, local-first journal for tasks, events, notes, brainstorms, topic collections and personal trackers. Daybook draws influence from **Bullet Journal** and the **Eisenhower Matrix**.
 
-This public repository is the website distribution and feedback space. The development source repository remains private. **The public app website has not been deployed yet.** Creating this repository does not publish your personal journal, Google account data or recordings.
+This public repository is the website distribution and feedback space. The development source repository remains private. **[Open Daybook Journal](https://nateprentice.github.io/daybook-journal-web/)**. The compiled website is deployed by GitHub Pages from the reviewed `site.zip` package. Creating this repository does not publish your personal journal, Google account data or recordings.
 
 ## What the current prototype can do
 
@@ -32,7 +32,7 @@ Manual assignments take priority over automatic due-date and journal-decision de
 
 This is a prototype. Full Google Calendar parity, closed-app background sync, reliable cold opening of the website offline, native mobile verification, cross-device audio, direct Evernote/Notability sync and external document editing are unfinished. Local journal storage is not encrypted. Export important data and download important recordings before clearing browser storage. Do not use the prototype for sensitive clinical records.
 
-Google sign-in on the eventual public website will need its website address added to the Google OAuth configuration. Each user must authorize their own Google account; the website does not distribute a shared test account. A new website address starts with separate browser storage, so move existing journal data by export/restore when the hosted app is ready.
+Google sign-in for this new website is being configured and verified. Each user must authorize their own Google account; the website does not distribute a shared test account. A new website address starts with separate browser storage, so move existing journal data by export/restore when moving to the hosted app.
 
 ## Bugs, support and suggestions
 
