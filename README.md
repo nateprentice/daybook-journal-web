@@ -7,6 +7,7 @@ This public repository is the website distribution and feedback space. The devel
 ## What the current prototype can do
 
 - Rapid-log tasks, events and notes; gather related entries into topic collections.
+- Browse a Bullet Journal Index with topic collections, standalone pages and dated daily logs. Open Monthly Log and Future Log directly; completed and dropped entries remain in historical daily logs. The Index updates automatically and works offline.
 - Plan in Today, a minimizable seven-day Heads up panel, and Schedule View, Day, Week, Work week, Month and Year calendars.
 - Show overdue items, review unfinished work and intentionally migrate it, cross it out with an optional reason, or keep it for later.
 - Brainstorm with ideas and sub-ideas; promote ideas into tasks, events, collections or Someday / Maybe.
