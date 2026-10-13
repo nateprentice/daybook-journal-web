@@ -33,7 +33,7 @@ Manual assignments take priority over automatic due-date and journal-decision de
 
 This is a prototype. Full Google Calendar parity, closed-app background sync, reliable cold opening of the website offline, native mobile verification, cross-device audio, direct Evernote/Notability sync and external document editing are unfinished. Local journal storage is not encrypted. Export important data and download important recordings before clearing browser storage. Do not use the prototype for sensitive clinical records.
 
-Google sign-in for this new website is being configured and verified. Each user must authorize their own Google account; the website does not distribute a shared test account. A new website address starts with separate browser storage, so move existing journal data by export/restore when moving to the hosted app.
+Hosted Google sign-in and a two-way Google Tasks update have been verified with the test account. Reconnect targets the linked account; interrupted reads retry safely, large sync recovery copies are compressed locally, and failed incoming sync is shown as needing attention. Each user must authorize their own Google account; the website does not distribute a shared test account. A new website address starts with separate browser storage, so move existing journal data by export/restore when moving to the hosted app.
 
 ## Bugs, support and suggestions
 
