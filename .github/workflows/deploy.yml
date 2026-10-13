@@ -2,7 +2,7 @@ name: Publish Daybook website
 on:
   push:
     branches: [main]
-    paths: [site.zip, google_auth.js, .github/workflows/deploy.yml]
+    paths: [site.zip, google_auth.js, main.dart.js.gz, .github/workflows/deploy.yml]
   workflow_dispatch:
 permissions:
   contents: read
@@ -29,6 +29,7 @@ jobs:
           test -f website/index.html
           test -f website/main.dart.js
           cp google_auth.js website/google_auth.js
+          gzip -dc main.dart.js.gz > website/main.dart.js
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
