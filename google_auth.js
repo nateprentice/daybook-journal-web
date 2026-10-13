@@ -15,7 +15,7 @@ function daybookLoadGoogle() {
   });
   return daybookGoogleLibrary;
 }
-window.daybookGoogleConnect = async (clientId, scopes) => {
+window.daybookGoogleConnect = async (clientId, scopes, loginHint = '') => {
   await daybookLoadGoogle();
   return new Promise((resolve, reject) => {
     let settled = false;
@@ -29,10 +29,11 @@ window.daybookGoogleConnect = async (clientId, scopes) => {
     const timer = setTimeout(() => finish(new Error('Google sign-in timed out')), 180000);
     const client = google.accounts.oauth2.initTokenClient({
       client_id: clientId, scope: scopes, include_granted_scopes: true,
+      ...(loginHint ? {login_hint: loginHint} : {}),
       callback: response => finish(response.error ? new Error(response.error) : null, response),
       error_callback: () => finish(new Error('Google popup closed or blocked')),
     });
-    try { client.requestAccessToken({ prompt: 'select_account' }); }
+    try { client.requestAccessToken({ prompt: loginHint ? '' : 'select_account' }); }
     catch (error) { finish(error); }
   });
 };
