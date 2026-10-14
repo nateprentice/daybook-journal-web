@@ -15,6 +15,7 @@ This public repository is the website distribution and feedback space. The devel
 - Optionally sync with Google Tasks, a dedicated Daybook calendar and private Google Drive app data. Display additional selected calendars. Changes queue while offline and retry while the app is open and authorized.
 - Record short voice notes in the website version. Queue free English transcription for when connectivity returns; inference runs on the recording device after a model download. Generated text stays separate from manual corrections. Audio does not sync across devices.
 - Prepare email drafts and meeting/reference links. Sending email remains your choice.
+- Save Word exports to Google Drive in Daybook → Word exports, using filenames such as `26--10-13--19-15-30.docx`. Optional file permission is requested only when saving; downloads still work offline. See [Drive export setup](docs/GOOGLE-DRIVE-EXPORTS.md).
 - Export an editable Word document from Settings → Export to Word. Choose dates and include undated entries; the document contains a Bullet Journal key, index, future/daily logs, collections, annotations, brainstorms, tracker readings and saved transcripts. Dropped entries remain crossed out. Audio and graphs are not embedded; Word edits do not sync back.
 
 ## The journal and matrix
