@@ -41,4 +41,3 @@ window.daybookGoogleRevoke = token => new Promise(resolve => {
   if (!window.google?.accounts?.oauth2) return resolve();
   google.accounts.oauth2.revoke(token, resolve);
 });
-

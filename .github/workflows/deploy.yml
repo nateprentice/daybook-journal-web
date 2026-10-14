@@ -2,7 +2,7 @@ name: Publish Daybook website
 on:
   push:
     branches: [main]
-    paths: [index.html, flutter_bootstrap.js, flutter_service_worker.js, site.zip, google_auth.js, main.dart.js.gz, assets/fonts/MaterialIcons-Regular.otf, .github/workflows/deploy.yml]
+    paths: [index.html, flutter_bootstrap.js, flutter_service_worker.js, site.zip, google_auth.js, vault_bridge.js, voice_notes.js, main.dart.js.gz, assets/fonts/MaterialIcons-Regular.otf, .github/workflows/deploy.yml]
   workflow_dispatch:
 permissions:
   contents: read
@@ -29,7 +29,7 @@ jobs:
           test -f website/index.html
           test -f website/main.dart.js
           cp index.html flutter_bootstrap.js flutter_service_worker.js website/
-          cp google_auth.js website/google_auth.js
+          cp google_auth.js vault_bridge.js voice_notes.js website/
           gzip -dc main.dart.js.gz > website/main.dart.js
           cp assets/fonts/MaterialIcons-Regular.otf website/assets/fonts/MaterialIcons-Regular.otf
       - uses: actions/configure-pages@v5
