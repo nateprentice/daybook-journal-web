@@ -5,7 +5,7 @@
   // Resolve from this script so GitHub Pages subdirectory hosting also works.
   const workerUrl = new URL('transcription_worker.js?queue=3', document.currentScript?.src || document.baseURI);
   const db = () => new Promise((resolve, reject) => {
-    const request = indexedDB.open('daybook-voice', 1);
+    const request = indexedDB.open(!window.daybookProfileId || window.daybookProfileId === 'original' ? 'daybook-voice' : `daybook-voice-${window.daybookProfileId}`, 1);
     request.onupgradeneeded = () => request.result.createObjectStore('clips');
     request.onsuccess = () => resolve(request.result);
     request.onerror = () => reject(request.error);
@@ -37,6 +37,14 @@
     return mode === 'readwrite' ? rawStorage(mode,id,value) : stored;
   }
   async function migrateVaultAudio() {
+    const original=window.daybookProfileId;
+    let profiles=[{id:'original'}];
+    try { profiles=JSON.parse(await window.daybookVaultProfileList?.() || '[]'); } catch (_) {}
+    if(!profiles.length)profiles=[{id:original || 'original'}];
+    try { for(const profile of profiles) {window.daybookProfileId=profile.id;await migrateCurrentVaultAudio();} }
+    finally {window.daybookProfileId=original;}
+  }
+  async function migrateCurrentVaultAudio() {
     const database = await db();
     let ids;
     try {

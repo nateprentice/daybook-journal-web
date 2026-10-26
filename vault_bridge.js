@@ -38,6 +38,9 @@
         if(navigator.locks)await navigator.locks.request('daybook-vault-session',{ifAvailable:true},lock=>{
           if(!lock)throw new Error('The vault is active in another window. Reopen Daybook.');write();
         });else write();
+      } else if (action === 'profile') {
+        await window.daybookVoice?.('vaultLock','{}');
+        window.daybookProfileId=args.id || 'original';
       } else if (action === 'acquire') {
         if (!window.isSecureContext || !crypto.subtle || !navigator.locks)
           throw new Error('Use a supported browser over HTTPS for encryption.');
@@ -58,7 +61,9 @@
         finally {bytes.fill(0);}
       } else if (action === 'migrate') {
         if (typeof window.daybookVoice !== 'function') throw new Error('Audio storage is unavailable. Reload to finish encryption.');
+        window.daybookVaultProfileList=async()=>args.profiles || '[]';
         const migrated=JSON.parse(await window.daybookVoice('vaultMigrate','{}'));
+        window.daybookVaultProfileList=undefined;
         if(migrated.vaultEncryption!==1)throw new Error('Reload Daybook to finish audio encryption.');
       } else if (action === 'lock') {
         try {await window.daybookVoice?.('vaultLock','{}');} finally {

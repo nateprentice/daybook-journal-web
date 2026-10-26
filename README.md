@@ -2,13 +2,15 @@
 
 A simple, local-first journal for tasks, events, notes, brainstorms, topic collections and personal trackers. Daybook draws influence from **Bullet Journal** and the **Eisenhower Matrix**.
 
-This public repository is the website distribution and feedback space. The development source repository remains private. **[Open Daybook Journal](https://nateprentice.github.io/daybook-journal-web/)**. The compiled website is deployed by GitHub Pages from the reviewed `site.zip` package, with the latest compiled app in `main.dart.js.gz` and sign-in fixes in `google_auth.js`. Creating this repository does not publish your personal journal, Google account data or recordings.
+This public repository is the website distribution and feedback space. The development source repository remains private. **The public app website has not been deployed yet.** Creating this repository does not publish your personal journal, Google account data or recordings.
+
+## Personal-journal pilot controls
+
+Settings includes separate Personal/Test journals, selected Google import previews, duplicate review, sync and change history with guarded undo, offline-file preparation, backup reminders and restore comparison, and vault passphrase changes. Collections includes reading, project, meeting and habit templates. These features do not import personal data or enable encryption automatically. See [the plain-English pilot guide](PERSONAL-PILOT.md) for steps, limits and validation.
 
 ## What the current prototype can do
 
 - Rapid-log tasks, events and notes; gather related entries into topic collections.
-- Use Today’s optional Bullet Journal view for a chronological daily log, familiar symbols, retained dates after migration, and morning/evening reflection notes. Guided Monthly migration reviews unfinished work, checks commitments and saves an optional intention. See [journal practice and one-month trial](docs/JOURNAL-PRACTICE.md).
-- Browse a Bullet Journal Index with topic collections, standalone pages and dated daily logs. Open Monthly Log and Future Log directly; completed and dropped entries remain in historical daily logs. The Index updates automatically and works offline.
 - Plan in Today, a minimizable seven-day Heads up panel, and Schedule View, Day, Week, Work week, Month and Year calendars.
 - Show overdue items, review unfinished work and intentionally migrate it, cross it out with an optional reason, or keep it for later.
 - Brainstorm with ideas and sub-ideas; promote ideas into tasks, events, collections or Someday / Maybe.
@@ -16,8 +18,6 @@ This public repository is the website distribution and feedback space. The devel
 - Optionally sync with Google Tasks, a dedicated Daybook calendar and private Google Drive app data. Display additional selected calendars. Changes queue while offline and retry while the app is open and authorized.
 - Record short voice notes in the website version. Queue free English transcription for when connectivity returns; inference runs on the recording device after a model download. Generated text stays separate from manual corrections. Audio does not sync across devices.
 - Prepare email drafts and meeting/reference links. Sending email remains your choice.
-- Save Word exports to Google Drive in Daybook → Word exports, using filenames such as `26--10-13--19-15-30.docx`. Optional file permission is requested only when saving; downloads still work offline. See [Drive export setup](docs/GOOGLE-DRIVE-EXPORTS.md).
-- Export an editable Word document from Settings → Export to Word. Choose dates and include undated entries; the document contains a Bullet Journal key, index, future/daily logs, collections, annotations, brainstorms, tracker readings and saved transcripts. Dropped entries remain crossed out. Audio and graphs are not embedded; Word edits do not sync back.
 
 ## The journal and matrix
 
@@ -34,9 +34,9 @@ Manual assignments take priority over automatic due-date and journal-decision de
 
 ## What still needs work
 
-This is a prototype. Full Google Calendar parity, closed-app background sync, reliable cold opening of the website offline, native mobile verification, cross-device audio, direct Evernote/Notability sync and external document editing are unfinished. Optional device encryption is available in Settings; read the security details before enabling it. It uses AES-256-GCM and PBKDF2-HMAC-SHA256 (600,000 iterations). Google Calendar/Tasks, the private Drive sync copy, Word exports and downloaded audio remain outside the local vault. There is no forgotten-passphrase recovery or independent security audit. See [encryption scope and setup](docs/ENCRYPTION.md). Export important data and download important recordings before clearing browser storage. Do not use the prototype for sensitive clinical records.
+This is a prototype. Full Google Calendar parity, closed-app background sync, reliable cold opening of the website offline, native mobile verification, cross-device audio, direct Evernote/Notability sync and external document editing are unfinished. Local journal storage is not encrypted. Export important data and download important recordings before clearing browser storage. Do not use the prototype for sensitive clinical records.
 
-Hosted Google sign-in and a two-way Google Tasks update have been verified with the test account. Reconnect targets the linked account; interrupted reads retry safely, large sync recovery copies are compressed locally, and failed incoming sync is shown as needing attention. Each user must authorize their own Google account; the website does not distribute a shared test account. A new website address starts with separate browser storage, so move existing journal data by export/restore when moving to the hosted app.
+Google sign-in on the eventual public website will need its website address added to the Google OAuth configuration. Each user must authorize their own Google account; the website does not distribute a shared test account. A new website address starts with separate browser storage, so move existing journal data by export/restore when the hosted app is ready.
 
 ## Bugs, support and suggestions
 

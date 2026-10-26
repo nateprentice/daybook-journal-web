@@ -2,7 +2,7 @@ name: Publish Daybook website
 on:
   push:
     branches: [main]
-    paths: [index.html, flutter_bootstrap.js, flutter_service_worker.js, site.zip, google_auth.js, vault_bridge.js, voice_notes.js, main.dart.js.gz, assets/fonts/MaterialIcons-Regular.otf, .github/workflows/deploy.yml]
+    paths: [index.html, flutter_bootstrap.js, site.zip, google_auth.js, vault_bridge.js, voice_notes.js, offline.js, daybook_offline_sw.js, transcription_worker.js, 'offline-assets.*', main.dart.js.gz, .github/workflows/deploy.yml]
   workflow_dispatch:
 permissions:
   contents: read
@@ -28,10 +28,14 @@ jobs:
           unzip -q site.zip -d website
           test -f website/index.html
           test -f website/main.dart.js
-          cp index.html flutter_bootstrap.js flutter_service_worker.js website/
-          cp google_auth.js vault_bridge.js voice_notes.js website/
+          cat offline-assets.part-* > offline-assets.zip
+          sha256sum -c offline-assets.sha256
+          unzip -oq offline-assets.zip -d website
+          cp index.html flutter_bootstrap.js daybook_offline_sw.js website/
+          cp google_auth.js vault_bridge.js voice_notes.js offline.js transcription_worker.js website/
           gzip -dc main.dart.js.gz > website/main.dart.js
-          cp assets/fonts/MaterialIcons-Regular.otf website/assets/fonts/MaterialIcons-Regular.otf
+          test -f website/canvaskit/canvaskit.wasm
+          test -f website/assets/assets/fonts/DaybookSans-Regular.ttf
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
