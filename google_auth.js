@@ -16,25 +16,26 @@ function daybookLoadGoogle() {
   return daybookGoogleLibrary;
 }
 window.daybookGoogleConnect = async (clientId, scopes, loginHint = '') => {
-  await daybookLoadGoogle();
+  try { await daybookLoadGoogle(); }
+  catch (error) { return JSON.stringify({daybook_auth_error: error.message === 'Google library timed out' ? 'library_timeout' : 'library_unavailable'}); }
   return new Promise((resolve, reject) => {
     let settled = false;
     const finish = (error, response) => {
       if (settled) return;
       settled = true;
       clearTimeout(timer);
-      if (error) reject(error);
+      if (error) resolve(JSON.stringify({daybook_auth_error:error}));
       else resolve(JSON.stringify(response));
     };
-    const timer = setTimeout(() => finish(new Error('Google sign-in timed out')), 180000);
+    const timer = setTimeout(() => finish('sign_in_timeout'), 180000);
     const client = google.accounts.oauth2.initTokenClient({
       client_id: clientId, scope: scopes, include_granted_scopes: true,
       ...(loginHint ? {login_hint: loginHint} : {}),
-      callback: response => finish(response.error ? new Error(response.error) : null, response),
-      error_callback: () => finish(new Error('Google popup closed or blocked')),
+      callback: response => finish(response.error ? (response.error === 'access_denied' ? 'access_denied' : ['invalid_client','invalid_request','unauthorized_client','redirect_uri_mismatch','origin_mismatch'].includes(response.error) ? 'oauth_setup' : 'unknown') : null, response),
+      error_callback: error => finish(['popup_closed','popup_failed_to_open'].includes(error?.type) ? error.type : 'unknown'),
     });
     try { client.requestAccessToken({ prompt: loginHint ? '' : 'select_account' }); }
-    catch (error) { finish(error); }
+    catch (_) { finish('unknown'); }
   });
 };
 window.daybookGoogleRevoke = token => new Promise(resolve => {
