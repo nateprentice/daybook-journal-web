@@ -36,6 +36,22 @@ jobs:
           gzip -dc main.dart.js.gz > website/main.dart.js
           test -f website/canvaskit/canvaskit.wasm
           test -f website/assets/assets/fonts/DaybookSans-Regular.ttf
+      - name: Verify offline release checksums
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          root = Path('website')
+          worker = (root / 'daybook_offline_sw.js').read_text()
+          build, _ = json.JSONDecoder().raw_decode(worker.split('const BUILD = ', 1)[1])
+          assert set(build['files']) == set(build['sha256'])
+          for name, expected in build['sha256'].items():
+              actual = hashlib.sha256((root / name).read_bytes()).hexdigest()
+              if actual != expected:
+                  raise SystemExit(f'Release asset checksum mismatch: {name}')
+          PY
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

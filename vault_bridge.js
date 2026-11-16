@@ -28,10 +28,17 @@
   window.daybookVault = async (action,json) => {
     try {
       const args = JSON.parse(json);
-      if (['plainSet','plainRemove','plainClear'].includes(action)) {
+      if (['plainSet','plainCompareSet','plainRemove','plainClear'].includes(action)) {
         const write=()=>{
           if(localStorage.getItem('flutter.daybook.vault.v1'))throw new Error('Encryption is active. Reopen Daybook to unlock.');
-          if(action==='plainSet')localStorage.setItem(args.key,JSON.stringify(args.value));
+          if (action === 'plainCompareSet') {
+            const active = JSON.parse(localStorage.getItem('flutter.daybook.activeProfile') ?? 'null') ?? 'original';
+            const current = JSON.parse(localStorage.getItem(args.key) ?? 'null');
+            if (active !== args.profileId || current !== args.expected) {
+              throw new Error('This journal changed in another tab.');
+            }
+            localStorage.setItem(args.key, JSON.stringify(args.value));
+          } else if(action==='plainSet')localStorage.setItem(args.key,JSON.stringify(args.value));
           else if(action==='plainRemove')localStorage.removeItem(args.key);
           else for(const name of Object.keys(localStorage))if(name.startsWith('flutter.'))localStorage.removeItem(name);
         };
